@@ -6,6 +6,7 @@ import { Box } from '@mui/system';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import Swal from 'sweetalert2';
 
 const AddNewStudent = () => {
     const [studentClass, setStudentClass] = React.useState('');
@@ -18,7 +19,7 @@ const AddNewStudent = () => {
         data.class = studentClass;
         data.gender = studentGender;
         data.year = yearValue.getFullYear();
-        fetch('http://localhost:5000/students', {
+        fetch('https://warm-citadel-00750.herokuapp.com/allStudents', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -28,7 +29,10 @@ const AddNewStudent = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('added successfully')
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully added',
+                    })
                     reset();
                 }
             });

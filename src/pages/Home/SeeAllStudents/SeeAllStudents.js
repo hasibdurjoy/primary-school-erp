@@ -29,11 +29,12 @@ const SeeAllStudents = () => {
     const handleAge = (event) => {
         setStudentClass(event.target.value);
     };
+
     React.useEffect(() => {
-        fetch('http://localhost:5000/students')
+        fetch(`https://warm-citadel-00750.herokuapp.com/students/?class=${studentClass}&year=${yearValue.getFullYear()}`)
             .then(res => res.json())
             .then(data => setStudents(data))
-    }, [])
+    }, [studentClass, yearValue])
 
     return (
         <>
@@ -78,8 +79,8 @@ const SeeAllStudents = () => {
                                 </Grid>
                             </Box>
 
-                            <br />
-                            <input type="submit" style={{ width: "50%", padding: "10px 0px" }} />
+                            {/* <br />
+                            <input type="submit" style={{ width: "50%", padding: "10px 0px" }} /> */}
                         </form>
                     </Grid>
                 </Grid>
@@ -100,7 +101,7 @@ const SeeAllStudents = () => {
                     </TableHead>
 
                     <TableBody>
-                        {students.map((student) => (
+                        {students.length > 0 && students.map((student) => (
                             <TableRow
                                 key={student._id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
