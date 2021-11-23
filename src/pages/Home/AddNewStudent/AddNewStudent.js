@@ -3,16 +3,35 @@ import { useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import { Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select } from '@mui/material';
 import { Box } from '@mui/system';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 const AddNewStudent = () => {
     const [studentClass, setStudentClass] = React.useState('');
     const [studentGender, setStudentGender] = React.useState('');
+    const [yearValue, setYearValue] = React.useState(new Date());
 
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
 
     const onSubmit = data => {
         data.class = studentClass;
         data.gender = studentGender;
+        data.year = yearValue.getFullYear();
+        fetch('http://localhost:5000/students', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert('added successfully')
+                    reset();
+                }
+            });
         console.log(data)
         reset();
     };
@@ -41,13 +60,17 @@ const AddNewStudent = () => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={4}>
-                                    <TextField
-                                        sx={{ width: '100%' }}
-                                        {...register("name")}
-                                        required
-                                        label="Name"
-                                        type="year"
-                                    />
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <DatePicker
+                                            views={['year']}
+                                            label="Year"
+                                            value={yearValue}
+                                            onChange={(newValue) => {
+                                                setYearValue(newValue);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} helperText={null} />}
+                                        />
+                                    </LocalizationProvider>
                                 </Grid>
                             </Grid>
                         </Box>

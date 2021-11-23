@@ -25,6 +25,14 @@ const Home = () => {
                         </Paper>
                     </Link>
                 </Grid>
+                <Grid item xs={8} md={4}>
+                    <Link to='/allStudents' style={{ textDecoration: "none", textAlign: "center" }}>
+                        <Paper >
+                            <img src="https://image.flaticon.com/icons/png/512/1252/1252249.png" alt="" width="100px" />
+                            <Typography variant="h6">All Students</Typography>
+                        </Paper>
+                    </Link>
+                </Grid>
             </Grid>
         </Container>
     );

@@ -6,7 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -27,13 +26,6 @@ function Navigation(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    /* function HomeIcon(props) {
-        return (
-            <SvgIcon {...props}>
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-            </SvgIcon>
-        );
-    } */
 
     const drawer = (
         <div>
@@ -51,6 +43,12 @@ function Navigation(props) {
                         <DashboardIcon />
                     </ListItemIcon>
                     <NavLink to="/dashboard" style={{ textDecoration: "none" }}>Dashboard</NavLink>
+                </ListItem>
+                <ListItem button >
+                    <ListItemIcon>
+                        <DashboardIcon />
+                    </ListItemIcon>
+                    <NavLink to="/allStudents" style={{ textDecoration: "none" }}>Manage Students</NavLink>
                 </ListItem>
             </List>
         </div>

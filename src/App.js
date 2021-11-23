@@ -8,6 +8,7 @@ import {
 import Dashboard from './pages/Home/Dashboard/Dashboard';
 import Navigation from './pages/Home/Navigation/Navigation';
 import AddNewStudent from './pages/Home/AddNewStudent/AddNewStudent';
+import SeeAllStudents from './pages/Home/SeeAllStudents/SeeAllStudents';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path='/home' element={<Home />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/addNewStudent' element={<AddNewStudent />} />
+            <Route path='/allStudents' element={<SeeAllStudents />} />
           </Route>
         </Routes>
       </Router>
