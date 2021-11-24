@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
-import { Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select } from '@mui/material';
+import { Container, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import { Box } from '@mui/system';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
@@ -13,31 +13,47 @@ const AddNewStudent = () => {
     const [studentGender, setStudentGender] = React.useState('');
     const [yearValue, setYearValue] = React.useState(new Date());
 
-    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = data => {
         data.class = studentClass;
         data.gender = studentGender;
         data.year = yearValue.getFullYear();
-        fetch('https://warm-citadel-00750.herokuapp.com/allStudents', {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
+
+        Swal.fire({
+            icon: 'question',
+            title: 'Do you want to add this student',
+            showDenyButton: true, showCancelButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successfully added',
+            .then((result) => {
+                if (result.isConfirmed) {
+                    fetch('https://infinite-badlands-03688.herokuapp.com/allStudents', {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
                     })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Successfully added',
+                                })
+                                reset();
+                            }
+                        });
+                    console.log(data)
                     reset();
+
+                }
+                else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
                 }
             });
-        console.log(data)
-        reset();
     };
 
     const handleAge = (event) => {

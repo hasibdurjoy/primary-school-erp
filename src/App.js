@@ -9,6 +9,7 @@ import Dashboard from './pages/Home/Dashboard/Dashboard';
 import Navigation from './pages/Home/Navigation/Navigation';
 import AddNewStudent from './pages/Home/AddNewStudent/AddNewStudent';
 import SeeAllStudents from './pages/Home/SeeAllStudents/SeeAllStudents';
+import UpdateStudent from './pages/Home/UpdateStudent/UpdateStudent';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/addNewStudent' element={<AddNewStudent />} />
             <Route path='/allStudents' element={<SeeAllStudents />} />
+            <Route path='/manageStudent/:studentId' element={<UpdateStudent />} />
           </Route>
         </Routes>
       </Router>
