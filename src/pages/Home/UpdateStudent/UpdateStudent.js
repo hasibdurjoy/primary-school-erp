@@ -34,9 +34,11 @@ const UpdateStudent = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        data.class = studentClass;
+        data.class = studentClass || student.class;
         data.gender = studentGender || student.gender;
         data.year = yearValue.getFullYear();
+
+        console.log(typeof (data.class));
 
         Swal.fire({
             icon: 'question',

@@ -161,7 +161,7 @@ const SeeAllStudents = () => {
                                         <b>Phone</b> : {student.mothersPhone}
                                     </TableCell>
 
-                                    <Link to={`/manageStudent/${student._id}`}> <TableCell align="left"><Button variant="contained">Edit</Button></TableCell></Link>
+                                    <Link to={`/manageStudent/${student._id}`} style={{ textDecoration: "none" }}> <TableCell align="left"><Button variant="contained">Edit</Button></TableCell></Link>
 
                                     <Button onClick={() => { handleDelete(student._id) }} variant="contained">Delete</Button>
 
