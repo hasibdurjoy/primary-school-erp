@@ -5,11 +5,11 @@ import { Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const SchoolStudentInfo = () => {
-    const [students, setStudents] = useState([])
-    const [male, setMale] = useState([])
-    const [female, setFemale] = useState([])
+    const [students, setStudents] = useState([]);
+    const [male, setMale] = useState([]);
+    const [female, setFemale] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allStudents')
+        fetch('https://infinite-badlands-03688.herokuapp.com/allStudents')
             .then(res => res.json())
             .then(data => {
                 setStudents(data)
