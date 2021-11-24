@@ -34,7 +34,7 @@ const UpdateStudent = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        data.class = studentClass || student.class;
+        data.class = studentClass;
         data.gender = studentGender || student.gender;
         data.year = yearValue.getFullYear();
 
@@ -65,20 +65,17 @@ const UpdateStudent = () => {
                                 })
                             }
                         })
-
-                } else if (result.isDenied) {
+                }
+                else if (result.isDenied) {
                     Swal.fire('Changes are not saved', '', 'info')
                 }
             });
-
-        // if (proceed) {
-
-        console.log(data);
     };
 
     const handleClass = (event) => {
         setStudentClass(event.target.value);
     };
+    console.log(studentClass);
     const handleGender = (event) => {
         setStudentGender(event.target.value);
     };

@@ -12,6 +12,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 const SeeAllStudents = () => {
     const [studentClass, setStudentClass] = React.useState('');
@@ -32,6 +34,39 @@ const SeeAllStudents = () => {
                 setLoading(false)
             })
     }, [studentClass, yearValue])
+
+    const handleDelete = id => {
+        Swal.fire({
+            icon: 'question',
+            title: 'Do you want to delete student',
+            showDenyButton: true, showCancelButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    const url = `https://infinite-badlands-03688.herokuapp.com/allStudents/${id}`;
+                    fetch(url, {
+                        method: 'DELETE'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.deletedCount > 0) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Deleted successfully',
+                                })
+                                const remainingStudents = students.filter(student => student._id !== id);
+                                setStudents(remainingStudents);
+                            }
+                        });
+                }
+                else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            });
+
+    }
 
     return (
         <>
@@ -127,6 +162,8 @@ const SeeAllStudents = () => {
                                     </TableCell>
 
                                     <Link to={`/manageStudent/${student._id}`}> <TableCell align="left"><Button variant="contained">Edit</Button></TableCell></Link>
+
+                                    <Button onClick={() => { handleDelete(student._id) }} variant="contained">Delete</Button>
 
                                 </TableRow>))
                         }
