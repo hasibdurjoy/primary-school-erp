@@ -29,7 +29,11 @@ function Navigation(props) {
 
     const drawer = (
         <div>
-            <Toolbar />
+            <Toolbar sx={{ backgroundColor: "#1976d2", color: "white" }} >
+                <Typography variant="h6" noWrap component="div">
+                    Primary School ERP
+                </Typography>
+            </Toolbar>
             <Divider />
             <List>
                 <ListItem button >
@@ -66,7 +70,7 @@ function Navigation(props) {
                     ml: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar>
+                <Toolbar >
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -77,7 +81,7 @@ function Navigation(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Responsive drawer
+                        Alexander Primary School
                     </Typography>
                 </Toolbar>
             </AppBar>
