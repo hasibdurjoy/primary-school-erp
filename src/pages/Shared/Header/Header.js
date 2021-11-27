@@ -31,12 +31,13 @@ export default function Header() {
                     </Typography>
                     {
                         user.email ? <>
+                            <Link to='/dashboard' style={{ textDecoration: 'none', color: 'white' }}><Button color="inherit" >Dashboard</Button></Link>
                             <Button color="inherit">{user.displayName}</Button>
                             <Button color="inherit" onClick={logOut}>Log Out</Button>
                         </>
                             :
                             <>
-                                <Link to='/login'><Button color="inherit" >Log In</Button></Link>
+                                <Link to='/login' style={{ textDecoration: 'none', color: 'white' }}><Button color="inherit" >Log In</Button></Link>
                             </>
                     }
                 </Toolbar>
