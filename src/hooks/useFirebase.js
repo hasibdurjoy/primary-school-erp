@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import {
     getAuth,
@@ -16,17 +15,21 @@ import initializeFirebase from '../pages/Authentication/firebase/firebase.init';
 initializeFirebase();
 
 const useFirebase = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedOut, setIsLoggedOut] = useState(false);
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
     const [authToken, setAuthToken] = useState('');
 
+
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
 
     const registerUser = (email, password, name, navigate) => {
         setIsLoading(true);
+        setIsLoggedIn(false);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setAuthError('');
@@ -57,6 +60,7 @@ const useFirebase = () => {
 
     const loginUser = (email, password, location, navigate) => {
         setIsLoading(true);
+        setIsLoggedIn(false);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const destination = location?.state?.from || '/dashboard';
@@ -71,6 +75,8 @@ const useFirebase = () => {
 
     const logInWithGoogle = (location, navigate) => {
         setIsLoading(true);
+        setIsLoggedIn(false);
+        console.log(isLoggedIn);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const user = result.user;
@@ -88,6 +94,7 @@ const useFirebase = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
+                setIsLoggedIn(true);
                 setUser(user);
                 getIdToken(user)
                     .then(idToken => {
@@ -111,14 +118,21 @@ const useFirebase = () => {
 
     const logOut = () => {
         setIsLoading(true);
+        setIsLoggedOut(true);
+        setIsLoggedIn(false);
         signOut(auth).then(() => {
             // Sign-out successful.
         }).catch((error) => {
             // An error happened.
         })
-            .finally(() => setIsLoading(false));
+            .finally(() => {
+                setIsLoading(false);
+                setIsLoggedOut(false);
+            });
     }
 
+    console.log(isLoggedIn);
+    console.log('out', isLoggedOut);
     const saveUser = (email, displayName, method) => {
         const user = { email, displayName };
         fetch('https://infinite-badlands-03688.herokuapp.com/users', {
@@ -135,6 +149,8 @@ const useFirebase = () => {
         admin,
         authToken,
         isLoading,
+        isLoggedIn,
+        isLoggedOut,
         authError,
         registerUser,
         loginUser,

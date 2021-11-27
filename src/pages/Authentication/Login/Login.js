@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const { user, loginUser, logInWithGoogle, isLoading, authError } = useAuth();
+    const { user, loginUser, logInWithGoogle, isLoading, authError, isLoggedIn } = useAuth();
     const location = useLocation();
     const history = useNavigate();
 
@@ -27,6 +28,26 @@ const Login = () => {
 
     const signInWithGoogle = () => {
         logInWithGoogle(location, history);
+    }
+
+
+
+    {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        isLoggedIn && Toast.fire({
+            icon: 'success',
+            title: 'Logged in successfully'
+        })
     }
 
     return (

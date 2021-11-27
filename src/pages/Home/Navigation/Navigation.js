@@ -18,6 +18,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Button } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const drawerWidth = 240;
 
@@ -29,7 +30,26 @@ function Navigation(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    const { user, logOut } = useAuth();
+    const { user, logOut, isLoggedOut } = useAuth();
+
+    {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        isLoggedOut && Toast.fire({
+            icon: 'alert',
+            title: 'Logged Out successfully'
+        })
+    }
+
 
     const drawer = (
         <div>

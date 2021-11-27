@@ -9,10 +9,30 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function Header() {
-    const { user, logOut } = useAuth();
+    const { user, logOut, isLoggedOut } = useAuth();
     const navigate = useNavigate();
+
+    {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        isLoggedOut && Toast.fire({
+            icon: 'alert',
+            title: 'Logged Out successfully'
+        })
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
