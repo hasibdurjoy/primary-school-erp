@@ -52,7 +52,7 @@ function Navigation(props) {
                     <ListItemIcon>
                         <DashboardIcon />
                     </ListItemIcon>
-                    <NavLink to="/allStudents" style={{ textDecoration: "none" }}>Manage Students</NavLink>
+                    <NavLink to="/dashboard/allStudents" style={{ textDecoration: "none" }}>Manage Students</NavLink>
                 </ListItem>
             </List>
         </div>

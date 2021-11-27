@@ -11,23 +11,28 @@ import AddNewStudent from './pages/Home/AddNewStudent/AddNewStudent';
 import SeeAllStudents from './pages/Home/SeeAllStudents/SeeAllStudents';
 import UpdateStudent from './pages/Home/UpdateStudent/UpdateStudent';
 import SchoolStudentInfo from './pages/Home/SchoolStudentInfo/SchoolStudentInfo';
+import AuthProvider from './context/AuthProvider/AuthProvider';
+import Register from './pages/Authentication/Register/Register';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigation />} >
-            <Route exact path='/' element={<Home />} />
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/addNewStudent' element={<AddNewStudent />} />
-            <Route path='/allStudents' element={<SeeAllStudents />} />
-            <Route path='/manageStudent/:studentId' element={<UpdateStudent />} />
-            <Route path='/allInfo' element={<SchoolStudentInfo />} />
-          </Route>
-        </Routes>
-      </Router>
+            <Route path='/register' element={<Register />} />
+            <Route path="/dashboard" element={<Navigation />} >
+              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/dashboard/addNewStudent' element={<AddNewStudent />} />
+              <Route path='/dashboard/allStudents' element={<SeeAllStudents />} />
+              <Route path='/dashboard/manageStudent/:studentId' element={<UpdateStudent />} />
+              <Route path='/dashboard/allInfo' element={<SchoolStudentInfo />} />
+            </Route>
+          </Routes>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
