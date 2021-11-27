@@ -13,7 +13,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import { CSVLink, CSVDownload } from "react-csv";
 
 const SeeAllStudents = () => {
     const [studentClass, setStudentClass] = React.useState('');
@@ -68,6 +68,24 @@ const SeeAllStudents = () => {
 
     }
 
+    const headers = [
+        { label: 'Name', key: 'name' },
+        { label: 'BirthId', key: 'birthId' },
+        { label: 'Class', key: 'class' },
+        { label: 'Fathers Name', key: 'fathersName' },
+        { label: 'Fathers NID', key: 'fathersNid' },
+        { label: 'Fathers Phone Number', key: 'fathersPhone' },
+        { label: 'Mothers Name', key: 'mothersName' },
+        { label: 'Mothers NID', key: 'mothersNid' },
+        { label: 'Mothers Phone Number', key: 'mothersPhone' },
+    ];
+
+    const csvReport = {
+        filename: `Report of Class ${studentClass} of ${yearValue.getFullYear()}`,
+        headers: headers,
+        data: students
+    }
+
     return (
         <>
             <Container>
@@ -114,6 +132,9 @@ const SeeAllStudents = () => {
                             {/* <br />
                             <input type="submit" style={{ width: "50%", padding: "10px 0px" }} /> */}
                         </form>
+                        {
+                            students.length > 0 && <CSVLink {...csvReport}> <br /> <Button variant="contained">Download Excel</Button></CSVLink>
+                        }
                     </Grid>
                 </Grid>
                 {loading &&
