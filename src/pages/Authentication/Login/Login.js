@@ -58,11 +58,11 @@ const Login = () => {
                             type="password"
                             size="small" />
 
-                        <Button variant="contained" sx={{ width: "75%", m: 1 }} style={{ backgroundColor: "#F63E7B" }} type="submit">Login</Button> <br />
+                        <Button variant="contained" sx={{ width: "75%", m: 1 }} type="submit">Login</Button> <br />
 
-                        <Button style={{ color: '#F63E7B' }} sx={{ my: 2 }} variant="text">--------------------- OR ---------------------</Button> <br />
+                        <Button style={{ color: 'blue' }} sx={{ my: 2 }} variant="text">--------------------- OR ---------------------</Button> <br />
 
-                        <Button style={{ borderColor: '#F63E7B', color: '#F63E7B' }} onClick={signInWithGoogle} sx={{ width: "75%", m: 1 }} variant="outlined"><img src="https://i.ibb.co/kMP3qmn/Group-573.png" alt="" style={{ width: '25px' }} />  Sign In With Google</Button> <br />
+                        <Button style={{ borderColor: 'blue', color: 'blue' }} onClick={signInWithGoogle} sx={{ width: "75%", m: 1 }} variant="outlined"><img src="https://i.ibb.co/kMP3qmn/Group-573.png" alt="" style={{ width: '25px' }} />  Sign In With Google</Button> <br />
 
                         <NavLink style={{ textDecoration: 'none' }} to='/register'><Button style={{ color: 'black' }} sx={{ my: 2 }} variant="text">New User? Please Register</Button></NavLink>
                     </form>

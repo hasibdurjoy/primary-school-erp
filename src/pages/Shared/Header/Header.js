@@ -7,9 +7,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import useAuth from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
     const { user, logOut } = useAuth();
+    const navigate = useNavigate();
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -26,8 +29,16 @@ export default function Header() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         News
                     </Typography>
-                    <Button color="inherit">{user.displayName}</Button>
-                    <Button color="inherit" onClick={logOut}>Log Out</Button>
+                    {
+                        user.email ? <>
+                            <Button color="inherit">{user.displayName}</Button>
+                            <Button color="inherit" onClick={logOut}>Log Out</Button>
+                        </>
+                            :
+                            <>
+                                <Link to='/login'><Button color="inherit" >Log In</Button></Link>
+                            </>
+                    }
                 </Toolbar>
             </AppBar>
         </Box>

@@ -13,6 +13,9 @@ import UpdateStudent from './pages/Home/UpdateStudent/UpdateStudent';
 import SchoolStudentInfo from './pages/Home/SchoolStudentInfo/SchoolStudentInfo';
 import AuthProvider from './context/AuthProvider/AuthProvider';
 import Register from './pages/Authentication/Register/Register';
+import Login from './pages/Authentication/Login/Login';
+import Header from './pages/Shared/Header/Header';
+import PrivateRoute from './pages/Authentication/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -22,8 +25,9 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />
-            <Route path='/register' element={<Register />} />
-            <Route path="/dashboard" element={<Navigation />} >
+            <Route path='/login' element={<><Header /> <Login /></>} />
+            <Route path='/register' element={<><Header /> <Register /></>} />
+            <Route path="/dashboard" element={<PrivateRoute><Navigation /></PrivateRoute>} >
               <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/dashboard/addNewStudent' element={<AddNewStudent />} />
               <Route path='/dashboard/allStudents' element={<SeeAllStudents />} />

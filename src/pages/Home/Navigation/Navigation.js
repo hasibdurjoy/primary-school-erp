@@ -15,6 +15,9 @@ import Typography from '@mui/material/Typography';
 import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { NavLink, Outlet } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Button } from '@mui/material';
+import useAuth from '../../../hooks/useAuth';
 
 const drawerWidth = 240;
 
@@ -26,6 +29,7 @@ function Navigation(props) {
         setMobileOpen(!mobileOpen);
     };
 
+    const { user, logOut } = useAuth();
 
     const drawer = (
         <div>
@@ -53,6 +57,12 @@ function Navigation(props) {
                         <DashboardIcon />
                     </ListItemIcon>
                     <NavLink to="/dashboard/allStudents" style={{ textDecoration: "none" }}>Manage Students</NavLink>
+                </ListItem>
+                <ListItem button >
+                    <ListItemIcon>
+                        <LogoutIcon />
+                    </ListItemIcon>
+                    <Button onClick={logOut} style={{ textDecoration: "none" }}>Logout</Button>
                 </ListItem>
             </List>
         </div>
