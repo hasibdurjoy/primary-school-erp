@@ -57,7 +57,7 @@ const AddMultipleStudent = () => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    fetch('http://localhost:5000/addStudents', {
+                    fetch('https://infinite-badlands-03688.herokuapp.com/addStudents', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json'
@@ -67,6 +67,7 @@ const AddMultipleStudent = () => {
                         .then(res => res.json())
                         .then(data => {
                             if (data.insertedCount) {
+                                setItems('')
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Successfully added',
@@ -86,14 +87,60 @@ const AddMultipleStudent = () => {
         <div>
             <input
                 type="file"
+                accept=".csv"
                 onChange={(e) => {
                     const file = e.target.files[0];
                     readExcel(file);
                 }}
             />
             <button onClick={handleSubmit}>Submit</button>
+
             {
-                items.map(item => <h2>{items.length}</h2>)
+                items && <TableContainer component={Paper}>
+                    <Table sx={{ mt: 3 }} size="small" aria-label="a dense table">
+
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell align="left">Birth Id</TableCell>
+                                <TableCell align="left">Class</TableCell>
+                                <TableCell align="left">Year</TableCell>
+                                <TableCell align="left">Father</TableCell>
+                                <TableCell align="left">Mother</TableCell>
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+
+                            {
+                                items.length > 0 && items.map((student) => (
+                                    <TableRow
+                                        key={student._id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {student.name}
+                                        </TableCell>
+                                        <TableCell align="left">{student.birthId}</TableCell>
+                                        <TableCell align="left">{student.class}</TableCell>
+                                        <TableCell align="left">{student.year}</TableCell>
+                                        <TableCell align="left">
+                                            <b>Name</b> :{student.fathersName} <br />
+                                            <b>NID</b> :{student.fathersNid} <br />
+                                            <b>Phone</b> : {student.fathersPhone}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            <b>Name</b> :{student.mothersName} <br />
+                                            <b>NID</b> :{student.mothersNid} <br />
+                                            <b>Phone</b> : {student.mothersPhone}
+                                        </TableCell>
+
+                                    </TableRow>))
+                            }
+                        </TableBody>
+
+                    </Table>
+                </TableContainer>
             }
         </div>
     );

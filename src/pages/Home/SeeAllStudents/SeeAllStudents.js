@@ -79,8 +79,9 @@ const SeeAllStudents = () => {
         { label: 'mothersName', key: 'mothersName' },
         { label: 'mothersNid', key: 'mothersNid' },
         { label: 'mothersPhone', key: 'mothersPhone' },
-        { label: 'year', key: `${yearValue.getFullYear()}` },
+        { label: 'year', key: 'year' },
     ];
+    console.log(headers);
 
     const csvReport = {
         filename: `Report of Class ${studentClass} of ${yearValue.getFullYear()}`,
@@ -154,9 +155,10 @@ const SeeAllStudents = () => {
                             <TableCell>Name</TableCell>
                             <TableCell align="left">Birth Id</TableCell>
                             <TableCell align="left">Class</TableCell>
-                            <TableCell align="left">Father</TableCell>
-                            <TableCell align="left">Mother</TableCell>
-                            <TableCell align="left">Action</TableCell>
+                            <TableCell align="left">Year</TableCell>
+                            <TableCell align="center">Father</TableCell>
+                            <TableCell align="center">Mother</TableCell>
+                            <TableCell align="center">Action</TableCell>
                         </TableRow>
                     </TableHead>
 
@@ -173,6 +175,7 @@ const SeeAllStudents = () => {
                                     </TableCell>
                                     <TableCell align="left">{student.birthId}</TableCell>
                                     <TableCell align="left">{student.class}</TableCell>
+                                    <TableCell align="left">{student.year}</TableCell>
                                     <TableCell align="left">
                                         <b>Name</b> :{student.fathersName} <br />
                                         <b>NID</b> :{student.fathersNid} <br />
