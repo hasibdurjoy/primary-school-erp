@@ -32,6 +32,7 @@ const SeeAllStudents = () => {
             .then(data => {
                 setStudents(data)
                 setLoading(false)
+                console.log(data);
             })
     }, [studentClass, yearValue])
 
@@ -69,15 +70,16 @@ const SeeAllStudents = () => {
     }
 
     const headers = [
-        { label: 'Name', key: 'name' },
-        { label: 'BirthId', key: 'birthId' },
-        { label: 'Class', key: 'class' },
-        { label: 'Fathers Name', key: 'fathersName' },
-        { label: 'Fathers NID', key: 'fathersNid' },
-        { label: 'Fathers Phone Number', key: 'fathersPhone' },
-        { label: 'Mothers Name', key: 'mothersName' },
-        { label: 'Mothers NID', key: 'mothersNid' },
-        { label: 'Mothers Phone Number', key: 'mothersPhone' },
+        { label: 'name', key: 'name' },
+        { label: 'birthId', key: 'birthId' },
+        { label: 'class', key: 'class' },
+        { label: 'fathersName', key: 'fathersName' },
+        { label: 'fathersNid', key: 'fathersNid' },
+        { label: 'fathersPhone', key: 'fathersPhone' },
+        { label: 'mothersName', key: 'mothersName' },
+        { label: 'mothersNid', key: 'mothersNid' },
+        { label: 'mothersPhone', key: 'mothersPhone' },
+        { label: 'year', key: `${yearValue.getFullYear()}` },
     ];
 
     const csvReport = {

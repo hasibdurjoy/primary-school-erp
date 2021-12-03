@@ -28,7 +28,7 @@ export default function Header() {
             }
         })
         isLoggedOut && Toast.fire({
-            icon: 'alert',
+            icon: 'error',
             title: 'Logged Out successfully'
         })
     }

@@ -16,6 +16,7 @@ import Register from './pages/Authentication/Register/Register';
 import Login from './pages/Authentication/Login/Login';
 import Header from './pages/Shared/Header/Header';
 import PrivateRoute from './pages/Authentication/PrivateRoute/PrivateRoute';
+import AddMultipleStudent from './pages/Home/AddMultipleStudent/AddMultipleStudent';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/dashboard" element={<PrivateRoute><Navigation /></PrivateRoute>} >
               <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/dashboard/addNewStudent' element={<AddNewStudent />} />
+              <Route path='/dashboard/addMultipleStudent' element={<AddMultipleStudent />} />
               <Route path='/dashboard/allStudents' element={<SeeAllStudents />} />
               <Route path='/dashboard/manageStudent/:studentId' element={<UpdateStudent />} />
               <Route path='/dashboard/allInfo' element={<SchoolStudentInfo />} />

@@ -14,8 +14,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { NavLink, Outlet } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AddReactionIcon from '@mui/icons-material/AddReaction';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import { NavLink, Outlet } from 'react-router-dom';
 import { Button } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
@@ -45,7 +47,7 @@ function Navigation(props) {
             }
         })
         isLoggedOut && Toast.fire({
-            icon: 'alert',
+            icon: 'error',
             title: 'Logged Out successfully'
         })
     }
@@ -77,6 +79,18 @@ function Navigation(props) {
                         <DashboardIcon />
                     </ListItemIcon>
                     <NavLink to="/dashboard/allStudents" style={{ textDecoration: "none" }}>Manage Students</NavLink>
+                </ListItem>
+                <ListItem button >
+                    <ListItemIcon>
+                        <AddReactionIcon />
+                    </ListItemIcon>
+                    <NavLink to="/dashboard/addNewStudent" style={{ textDecoration: "none" }}>Add new Student</NavLink>
+                </ListItem>
+                <ListItem button >
+                    <ListItemIcon>
+                        <PeopleAltIcon />
+                    </ListItemIcon>
+                    <NavLink to="/dashboard/addMultipleStudent" style={{ textDecoration: "none" }}>Add Multiple Student</NavLink>
                 </ListItem>
                 <ListItem button >
                     <ListItemIcon>
